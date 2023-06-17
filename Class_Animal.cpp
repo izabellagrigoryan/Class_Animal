@@ -152,7 +152,9 @@ int main()
     Cat cat3;
     cat3 = cat2;
   
-    Horse horse;
+    Animal *horse = new Horse;
+    horse->sound();
+    delete horse;
     Wolf wolf;
 
     Chicken chicken;
