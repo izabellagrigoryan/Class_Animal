@@ -56,34 +56,17 @@ public:
 };
 
 class Cat :public Mammal {
-public:
-    Cat() {
-        sound();
-    }
-    //copy constructor
-    Cat(const Cat& an) {
-        sound();
-    }
+public:   
     void sound() { cout << "I am a Cat" << endl; }
 };
 
 class Horse :public Mammal {
 public:
-    Horse() {
-        sound();
-    }
-    //copy constructor
-    Horse(const Horse& an) {
-        sound();
-    }
     void sound() { cout << "I am a Horse" << endl; }
 };
 
 class Wolf :public Mammal {
 public:
-    Wolf() {
-        sound();
-    }
     void sound() { cout << "I am a Wolf" << endl; }
 };
 
@@ -94,25 +77,11 @@ public:
 
 class Whitefish:public Fish {
 public:
-    Whitefish() {
-        sound();
-    }
-    //copy constructor
-    Whitefish(const Whitefish& an) {
-        sound();
-    }
     void sound() { cout << "I am a Whitefish" << endl; }
 };
 
 class Crocodile : public Fish{
 public:
-    Crocodile() {
-        sound();
-    }
-    //copy constructor
-    Crocodile(const Crocodile& an) {
-        sound();
-    }
     virtual void sound() { cout << "I am a Crocodile" << endl; }
 };
 
@@ -123,44 +92,27 @@ public:
 
 class Chicken :public Bird {
 public:
-    Chicken() {
-        sound();
-    }
-    //copy constructor
-    Chicken(const Chicken& an) {
-        sound();
-    }
     void sound() { cout << "I am a Chicken" << endl; }
 };
 
 class Eagle :public Bird {
 public:
-    Eagle() {
-        sound();
-    }
-    //copy constructor
-    Eagle(const Eagle& an) {
-        sound();
-    }
     void sound() { cout << "I am an Eagle" << endl; }
 };
 
 int main()
-{
-    Cat cat;
-    Cat cat2 = cat;
-    Cat cat3;
-    cat3 = cat2;
-  
-    Animal *horse = new Horse;
-    horse->sound();
-    delete horse;
-    Wolf wolf;
+{ 
+    Animal* animals[7];
+    animals[0] = new Cat; animals[0]->sound();
+    animals[1] = new Horse; animals[1]->sound();
+    animals[2] = new Wolf; animals[2]->sound();
+    animals[3] = new Crocodile; animals[3]->sound();
+    animals[4] = new Whitefish; animals[4]->sound();
+    animals[5] = new Chicken; animals[5]->sound();
+    animals[6] = new Eagle; animals[6]->sound();
+    
+    for(int i = 0; i < 7; i++)
+        delete animals[i];
 
-    Chicken chicken;
-    Eagle eagle;
-
-    Whitefish whitef;
-    Crocodile croc;
 }
 
