@@ -103,14 +103,17 @@ public:
 int main()
 { 
     Animal* animals[7];
-    animals[0] = new Cat; animals[0]->sound();
-    animals[1] = new Horse; animals[1]->sound();
-    animals[2] = new Wolf; animals[2]->sound();
-    animals[3] = new Crocodile; animals[3]->sound();
-    animals[4] = new Whitefish; animals[4]->sound();
-    animals[5] = new Chicken; animals[5]->sound();
-    animals[6] = new Eagle; animals[6]->sound();
-    
+    animals[0] = new Cat; 
+    animals[1] = new Horse;
+    animals[2] = new Wolf; 
+    animals[3] = new Crocodile; 
+    animals[4] = new Whitefish; 
+    animals[5] = new Chicken; 
+    animals[6] = new Eagle;   
+
+    for (int i = 0; i < 7; i++)
+         animals[i]->sound();
+
     for(int i = 0; i < 7; i++)
         delete animals[i];
 
