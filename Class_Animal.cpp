@@ -4,165 +4,161 @@
 #include <iostream>
 using namespace std;
 
-struct external_organs { string skin, body, head, tail, limbs, teeth, eye, nostril; };
-struct internal_organs { string skeleton, skull, heart, lung; };
+class external_organs { public: string skin, body, limbs, teeth; };
+class internal_organs { public: string skeleton, heart, lung; };
 
 class Animal {
+public:
+    external_organs* ex_o;
+    internal_organs* in_o;
 
-protected:
-    external_organs  ex_o;
-    internal_organs in_o;
+    Animal() {
+        this->ex_o = new external_organs;
+        this->in_o = new internal_organs;
+    }
+    virtual void sound() { cout << "I am an Animal" << endl; }
+    //copy constructor
+    Animal(const Animal& an) {
+        this->ex_o = new external_organs;
+        this->in_o = new internal_organs;
+        this->ex_o->skin = an.ex_o->skin;
+        this->ex_o->body = an.ex_o->body;
+        this->ex_o->limbs = an.ex_o->limbs;
+        this->ex_o->teeth = an.ex_o->teeth;
+        this->in_o->skeleton = an.in_o->skeleton;
+        this->in_o->heart = an.in_o->heart;
+        this->in_o->lung = an.in_o->lung;
+    }
+    //operator assignment
+    Animal& operator=(const Animal& an) {
+        if (this != &an) {
+            delete this->ex_o;
+            delete this->in_o;
 
-    string name;
-
-    void sound(string name){}
-    void eat(string name){}
-    void sleep(string name) {}
-    void fly(string name){}
-    void reproduction(string name){}
-
+            this->ex_o = new external_organs;
+            this->in_o = new internal_organs;
+            this->ex_o->skin = an.ex_o->skin;
+            this->ex_o->body = an.ex_o->body;
+            this->ex_o->limbs = an.ex_o->limbs;
+            this->ex_o->teeth = an.ex_o->teeth;
+            this->in_o->skeleton = an.in_o->skeleton;
+            this->in_o->heart = an.in_o->heart;
+            this->in_o->lung = an.in_o->lung;
+        }
+        return *this;
+    }
+    ~Animal() { delete ex_o; delete in_o; }
 };
 
 class Mammal :public Animal {
 public:
-    Mammal(){}
-    Mammal(string name) {
-        this->name = name;
-        body_structure();
-        eat();
-    }
-    void body_structure()
-    {
-        ex_o.limbs = "four foot";
-        ex_o.skin = "fur";
-        cout << this->name << "  has  " << ex_o.limbs << "  and  " << ex_o.skin << endl;
-    }
-    void eat()
-    {
-        cout << this->name << "  drinks milk" << endl;
-    }
-    void sleep(){}
+    virtual void sound() { cout << "I am a Mammal" << endl; }
 };
 
-class Herbivore_Mammal :public Mammal {
+class Cat :public Mammal {
 public:
-    Herbivore_Mammal(string name):Mammal(name)
-    {
-        this->name = name;
-        eat();
+    Cat() {
+        sound();
     }
-    void eat()
-    {
-        cout << this->name << "  eats grass" << endl;
+    //copy constructor
+    Cat(const Cat& an) {
+        sound();
     }
+    void sound() { cout << "I am a Cat" << endl; }
 };
 
-class Predator_Mammal :public Mammal {
+class Horse :public Mammal {
 public:
-    Predator_Mammal(string name) :Mammal(name)
-    {
-        this->name = name;
-        eat();
+    Horse() {
+        sound();
     }
-    void eat()
-    {
-        cout << this->name << "  eats meat" << endl;
+    //copy constructor
+    Horse(const Horse& an) {
+        sound();
     }
+    void sound() { cout << "I am a Horse" << endl; }
+};
+
+class Wolf :public Mammal {
+public:
+    Wolf() {
+        sound();
+    }
+    void sound() { cout << "I am a Wolf" << endl; }
 };
 
 class Fish :public Animal {
 public:
-    Fish() {}
-    Fish(string name) {
-        this->name = name;
-        body_structure();
-    }
-    void body_structure()
-    {
-        in_o.lung = "grunt";
-        ex_o.skin = "scale";
-        cout << this->name << "  has  " << in_o.lung << " and  " << ex_o.skin << endl;
-    }
-    virtual void reproduction()
-    {
-        cout << this->name << "  reproduce by spawn.  " << endl;
-    }
+    virtual void sound() { cout << "I am a Fish" << endl; }
 };
 
-class Non_Amphibious :public Fish {
+class Whitefish:public Fish {
 public:
-    Non_Amphibious(string name) :Fish(name) {
-        this->name = name;
-        reproduction();
+    Whitefish() {
+        sound();
     }
+    //copy constructor
+    Whitefish(const Whitefish& an) {
+        sound();
+    }
+    void sound() { cout << "I am a Whitefish" << endl; }
 };
 
-class Amphibious :public Fish {
+class Crocodile : public Fish{
 public:
-    Amphibious(string name) :Fish(name) {
-        this->name = name;
-        reproduction();
+    Crocodile() {
+        sound();
     }
-    void reproduction()
-    {
-        cout << this->name << "  reproduce by eggs.  " << endl;
+    //copy constructor
+    Crocodile(const Crocodile& an) {
+        sound();
     }
+    virtual void sound() { cout << "I am a Crocodile" << endl; }
 };
 
 class Bird :public Animal {
 public:
-    Bird() {}
-    Bird(string name) {
-        this->name = name;
-        body_structure();
-        reproduction();
-    }
-    void body_structure()
-    {
-        ex_o.limbs = "two foot and two wings";
-        ex_o.skin = "feather";
-        cout << this->name << "  has  " << ex_o.limbs << " and  " << ex_o.skin << endl;
-    }
-    void reproduction()
-    {
-        cout << this->name << "  reproduce by eggs.  " << endl;
-    }
+    virtual void sound() { cout << "I am a Bird" << endl; }
 };
 
-class Herbivore_Bird :public Bird {
+class Chicken :public Bird {
 public:
-    Herbivore_Bird(string name) : Bird(name) {
-        this->name = name;
-        eat();
+    Chicken() {
+        sound();
     }
-    void eat()
-    {
-        cout << this->name << "  eats grass" << endl;
+    //copy constructor
+    Chicken(const Chicken& an) {
+        sound();
     }
+    void sound() { cout << "I am a Chicken" << endl; }
 };
 
-class Predator_Bird :public Bird {
+class Eagle :public Bird {
 public:
-    Predator_Bird(string name) : Bird(name) {
-        this->name = name;
-        eat();
+    Eagle() {
+        sound();
     }
-    
-    void eat()
-    {
-        cout << this->name << "  eats meat" << endl;
+    //copy constructor
+    Eagle(const Eagle& an) {
+        sound();
     }
+    void sound() { cout << "I am an Eagle" << endl; }
 };
 
 int main()
 {
-    Herbivore_Mammal herb("Cow");
-    Predator_Mammal pred("Wolf");
+    Cat cat;
+    Cat cat2 = cat;
+    Cat cat3;
+    cat3 = cat2;
+  
+    Horse horse;
+    Wolf wolf;
 
-    Herbivore_Bird chick("Chicken");
-    Predator_Bird eagle("Eagle");
+    Chicken chicken;
+    Eagle eagle;
 
-    Non_Amphibious whitef("Whitefish");
-    Amphibious croc("Crocodile");
+    Whitefish whitef;
+    Crocodile croc;
 }
 
