@@ -53,7 +53,7 @@ public:
 
 class Mammal :public Animal {
 public:
-    virtual void sound() { cout << "I am a Mammal" << endl; }
+    void sound() override { cout << "I am a Mammal" << endl; }
     void move() override 
     { cout << "I am walking" << endl; } 
     
@@ -62,7 +62,7 @@ public:
 
 class Cat :public Mammal {
 public:   
-    virtual void sound() { cout << "I am a Cat" << endl; }
+    void sound() final { cout << "I am a Cat" << endl; }
     void move() override
     {
         cout << "I am clawing" << endl;
@@ -73,8 +73,8 @@ public:
 
 class Horse :public Mammal {
 public:
-    virtual void sound() { cout << "I am a Horse" << endl; }
-    void move() override
+    void sound() final { cout << "I am a Horse" << endl; }
+    void move() final
     {
         cout << "I am running" << endl;
     }
@@ -84,14 +84,14 @@ public:
 
 class Wolf :public Mammal {
 public:
-    virtual void sound() { cout << "I am a Wolf" << endl; }
+    void sound() final { cout << "I am a Wolf" << endl; }
     
     virtual ~Wolf() { }
 };
 
 class Fish :public Animal {
 public:
-    virtual void sound() { cout << "I am a Fish" << endl; }
+    void sound() override { cout << "I am a Fish" << endl; }
     virtual void move() final
     {
         cout << "I am swimming" << endl;
@@ -102,21 +102,21 @@ public:
 
 class Whitefish:public Fish {
 public:
-    virtual void sound() { cout << "I am a Whitefish" << endl; }
+    void sound() final { cout << "I am a Whitefish" << endl; }
 
     virtual ~Whitefish() { }
 };
 
 class Crocodile : public Fish{
 public:
-    virtual void sound() { cout << "I am a Crocodile" << endl; }
+    void sound() final { cout << "I am a Crocodile" << endl; }
 
     virtual ~Crocodile() { }
 };
 
 class Bird :public Animal {
 public:
-    virtual void sound() { cout << "I am a Bird" << endl; }
+    void sound() override { cout << "I am a Bird" << endl; }
     void move() final
     {
         cout << "I am flying" << endl;
@@ -127,14 +127,14 @@ public:
 
 class Chicken :public Bird {
 public:
-    void sound() { cout << "I am a Chicken" << endl; }
+    void sound() final { cout << "I am a Chicken" << endl; }
 
     virtual ~Chicken() { }
 };
 
 class Eagle :public Bird {
 public:
-    void sound() { cout << "I am an Eagle" << endl; }
+    void sound() final { cout << "I am an Eagle" << endl; }
 
     virtual ~Eagle() { }
 };
