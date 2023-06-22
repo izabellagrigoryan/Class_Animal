@@ -16,8 +16,7 @@ public:
         this->ex_o = new external_organs;
         this->in_o = new internal_organs;
     }
-    virtual void sound() { cout << "I am an Animal" << endl; }
-    virtual void move() { cout << "I am not moving" << endl; }
+
     //copy constructor
     Animal(const Animal& an) {
         this->ex_o = new external_organs;
@@ -48,25 +47,25 @@ public:
         }
         return *this;
     }
+    
+    virtual void sound() = 0;
+    virtual void move() = 0;
+
     virtual ~Animal() { delete ex_o; delete in_o; cout << "I'm destructor" << endl; }
 };
 
 class Mammal :public Animal {
 public:
-    void sound() override { cout << "I am a Mammal" << endl; }
-    void move() override 
-    { cout << "I am walking" << endl; } 
-    
+    virtual void eat() = 0;
+
     virtual ~Mammal() { }
 };
 
 class Cat :public Mammal {
 public:   
     void sound() final { cout << "I am a Cat" << endl; }
-    void move() override
-    {
-        cout << "I am clawing" << endl;
-    }
+    void move() final { cout << "I am clawing" << endl; }
+    void eat() final { cout << "I eat fish" << endl; }
 
     virtual ~Cat() { }
 };
@@ -74,10 +73,8 @@ public:
 class Horse :public Mammal {
 public:
     void sound() final { cout << "I am a Horse" << endl; }
-    void move() final
-    {
-        cout << "I am running" << endl;
-    }
+    void move() final { cout << "I am running" << endl; }
+    void eat() final { cout << "I eat grass" << endl; }
 
     virtual ~Horse() { }
 };
@@ -85,24 +82,24 @@ public:
 class Wolf :public Mammal {
 public:
     void sound() final { cout << "I am a Wolf" << endl; }
-    
+    void move() final { cout << "I am walking" << endl; }
+    void eat() final { cout << "I eat meat" << endl; }
+
     virtual ~Wolf() { }
 };
 
 class Fish :public Animal {
 public:
-    void sound() override { cout << "I am a Fish" << endl; }
-    virtual void move() final
-    {
-        cout << "I am swimming" << endl;
-    }
-
+    virtual void breathe() = 0;
+    void move() final { cout << "I am swimming" << endl; }
+    
     virtual ~Fish() { }
 };
 
 class Whitefish:public Fish {
 public:
     void sound() final { cout << "I am a Whitefish" << endl; }
+    void breathe() final { cout << "I breathe with snorts" << endl; }
 
     virtual ~Whitefish() { }
 };
@@ -110,17 +107,15 @@ public:
 class Crocodile : public Fish{
 public:
     void sound() final { cout << "I am a Crocodile" << endl; }
+    void breathe() final { cout << "I breathe with lungs" << endl; }
 
     virtual ~Crocodile() { }
 };
 
 class Bird :public Animal {
 public:
-    void sound() override { cout << "I am a Bird" << endl; }
-    void move() final
-    {
-        cout << "I am flying" << endl;
-    }
+    void move() final { cout << "I am flying" << endl; }
+    virtual void fly() = 0;
 
     virtual ~Bird() { }
 };
@@ -128,6 +123,7 @@ public:
 class Chicken :public Bird {
 public:
     void sound() final { cout << "I am a Chicken" << endl; }
+    void fly() final { cout << "I can't fly" << endl; }
 
     virtual ~Chicken() { }
 };
@@ -135,6 +131,7 @@ public:
 class Eagle :public Bird {
 public:
     void sound() final { cout << "I am an Eagle" << endl; }
+    void fly() final { cout << "I can fly very high" << endl; }
 
     virtual ~Eagle() { }
 };
@@ -155,7 +152,7 @@ int main()
     cout << endl;
     for (int i = 0; i < 7; i++)
         animals[i]->move();
-
+    
     for(int i = 0; i < 7; i++)
         delete animals[i];
 
